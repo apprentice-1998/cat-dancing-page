@@ -1,0 +1,91 @@
+@import '../styles/animations.css';
+
+.stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  min-height: 380px;
+  padding-bottom: 40px;
+  overflow: hidden;
+}
+
+.spotlightLeft,
+.spotlightRight {
+  position: absolute;
+  top: 0;
+  width: 180px;
+  height: 320px;
+  border-radius: 0 0 50% 50%;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.spotlightLeft {
+  left: 10%;
+  background: radial-gradient(ellipse at top, #fff 0%, transparent 70%);
+  transform: rotate(-15deg);
+}
+
+.spotlightRight {
+  right: 10%;
+  background: radial-gradient(ellipse at top, #fff 0%, transparent 70%);
+  transform: rotate(15deg);
+}
+
+.catWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  will-change: transform;
+}
+
+/* dance styles */
+.bounce { animation: bounce 1s ease-in-out infinite; }
+.spin   { animation: spin 1.2s linear infinite; }
+.shake  { animation: shake 0.8s ease-in-out infinite; }
+.jump   { animation: jump 1.1s cubic-bezier(0.33, 1, 0.68, 1) infinite; }
+
+.catImage {
+  width: 160px;
+  height: auto;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.25));
+}
+
+.shadow {
+  width: 100px;
+  height: 18px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+  margin-top: -6px;
+  filter: blur(4px);
+}
+
+.bounce .shadow { animation: shadowBounce 1s ease-in-out infinite; }
+.spin .shadow   { animation: shadowSpin 1.2s linear infinite; }
+.jump .shadow   { animation: shadowBounce 1.1s cubic-bezier(0.33, 1, 0.68, 1) infinite; }
+
+/* music notes */
+.notes {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  pointer-events: none;
+}
+
+.note {
+  position: absolute;
+  font-size: 1.6rem;
+  color: #fff;
+  opacity: 0;
+  user-select: none;
+}
+
+.noteFloat {
+  animation: floatNote 2s ease-out infinite;
+}
