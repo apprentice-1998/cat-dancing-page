@@ -1,14 +1,28 @@
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-html, body {
-  height: 100%;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
+html,
+body,
 #root {
   height: 100%;
+}
+
+body {
+  font-family: 'Segoe UI', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background: #fff6ec;
+  color: #4a3a2f;
+}
+
+button {
+  font-family: inherit;
+}
+
+img {
+  max-width: 100%;
 }

@@ -2,85 +2,76 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
-  padding: 24px 16px;
-  width: 100%;
+  gap: 1rem;
+  margin-top: 2rem;
 }
 
-.playBtn {
-  padding: 14px 48px;
-  font-size: 1.2rem;
-  font-weight: 700;
+.toggleButton {
+  padding: 0.75rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
   border: none;
-  border-radius: 50px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ff9d4d, #ff6f91);
+  color: #fff;
   cursor: pointer;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: white;
-  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.5);
+  box-shadow: 0 6px 16px rgba(255, 111, 145, 0.35);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
-  letter-spacing: 0.04em;
 }
 
-.playBtn:hover {
+.toggleButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(102, 126, 234, 0.7);
+  box-shadow: 0 8px 20px rgba(255, 111, 145, 0.45);
 }
 
-.playBtn:active {
+.toggleButton:active {
   transform: translateY(0);
 }
 
-.playBtn.playing {
-  background: linear-gradient(135deg, #f093fb, #f5576c);
-  box-shadow: 0 4px 20px rgba(245, 87, 108, 0.5);
+.toggleButton:focus-visible {
+  outline: 3px solid #4d7cff;
+  outline-offset: 3px;
 }
 
-.playBtn.playing:hover {
-  box-shadow: 0 6px 24px rgba(245, 87, 108, 0.7);
-}
-
-.danceMenu {
+.speedGroup {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
+  gap: 0.5rem;
 }
 
-.danceBtn {
-  padding: 10px 20px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-radius: 30px;
+.speedButton {
+  padding: 0.5rem 1.1rem;
+  font-size: 0.9rem;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
+  background: transparent;
+  color: #4a3a2f;
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  backdrop-filter: blur(8px);
-  transition: all 0.2s ease;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 
-.danceBtn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.6);
-  transform: translateY(-1px);
+.speedButton:hover {
+  border-color: #ff9d4d;
 }
 
-.danceBtn.active {
-  background: rgba(255, 255, 255, 0.9);
-  color: #764ba2;
-  border-color: white;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+.speedButton:focus-visible {
+  outline: 3px solid #4d7cff;
+  outline-offset: 2px;
 }
 
-/* ── Responsive ── */
+.speedButtonActive {
+  background: #4a3a2f;
+  border-color: #4a3a2f;
+  color: #fff;
+}
+
 @media (max-width: 480px) {
-  .playBtn {
-    padding: 12px 36px;
-    font-size: 1.05rem;
+  .toggleButton {
+    padding: 0.65rem 1.5rem;
+    font-size: 1rem;
   }
 
-  .danceBtn {
-    padding: 8px 16px;
-    font-size: 0.88rem;
+  .speedButton {
+    padding: 0.45rem 0.9rem;
+    font-size: 0.8rem;
   }
 }

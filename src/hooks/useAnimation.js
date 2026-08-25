@@ -1,16 +1,12 @@
 import { useState, useCallback } from 'react';
 
-export function useAnimation() {
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [danceStyle, setDanceStyle] = useState('bounce');
+export default function useAnimation(initialPlaying = true) {
+  const [isPlaying, setIsPlaying] = useState(initialPlaying);
+  const [speed, setSpeed] = useState('normal'); // slow | normal | fast
 
-  const toggle = useCallback(() => {
-    setIsPlaying(prev => !prev);
-  }, []);
+  const toggle = useCallback(() => setIsPlaying((prev) => !prev), []);
+  const play = useCallback(() => setIsPlaying(true), []);
+  const pause = useCallback(() => setIsPlaying(false), []);
 
-  const changeDance = useCallback((style) => {
-    setDanceStyle(style);
-  }, []);
-
-  return { isPlaying, toggle, danceStyle, changeDance };
+  return { isPlaying, toggle, play, pause, speed, setSpeed };
 }

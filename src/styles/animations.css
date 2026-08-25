@@ -1,58 +1,130 @@
-/* ── bounce ── */
-@keyframes bounce {
-  0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
-  20%       { transform: translateY(-30px) rotate(-8deg) scale(1.05); }
-  40%       { transform: translateY(-50px) rotate(8deg) scale(1.1); }
-  60%       { transform: translateY(-30px) rotate(-5deg) scale(1.05); }
-  80%       { transform: translateY(-10px) rotate(3deg) scale(1.02); }
+.dancing-cat {
+  position: relative;
+  display: inline-block;
+  width: clamp(160px, 30vw, 260px);
+  will-change: transform;
 }
 
-/* ── spin ── */
-@keyframes spin {
-  0%   { transform: rotate(0deg) scale(1); }
-  25%  { transform: rotate(90deg) scale(1.1); }
-  50%  { transform: rotate(180deg) scale(1.15); }
-  75%  { transform: rotate(270deg) scale(1.1); }
-  100% { transform: rotate(360deg) scale(1); }
+.dancing-cat__image {
+  width: 100%;
+  height: auto;
+  display: block;
+  transform: translateZ(0);
+  transform-origin: center bottom;
 }
 
-/* ── shake ── */
-@keyframes shake {
-  0%, 100% { transform: translateX(0) rotate(0deg); }
-  10%       { transform: translateX(-18px) rotate(-10deg); }
-  20%       { transform: translateX(18px) rotate(10deg); }
-  30%       { transform: translateX(-14px) rotate(-7deg) translateY(-8px); }
-  40%       { transform: translateX(14px) rotate(7deg) translateY(-8px); }
-  50%       { transform: translateX(-10px) rotate(-5deg) translateY(-15px); }
-  60%       { transform: translateX(10px) rotate(5deg) translateY(-15px); }
-  70%       { transform: translateX(-6px) rotate(-3deg) translateY(-5px); }
-  80%       { transform: translateX(6px) rotate(3deg); }
-  90%       { transform: translateX(-3px) rotate(-1deg); }
+.dancing-cat__shadow {
+  width: 60%;
+  height: 16px;
+  margin: 0.5rem auto 0;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.28), transparent 70%);
+  border-radius: 50%;
+  transform-origin: center;
 }
 
-/* ── jump ── */
-@keyframes jump {
-  0%, 100% { transform: translateY(0) scaleY(1); }
-  10%       { transform: translateY(8px) scaleY(0.9) scaleX(1.1); }
-  30%       { transform: translateY(-70px) scaleY(1.1) scaleX(0.95); }
-  50%       { transform: translateY(-90px) scaleY(1.15) scaleX(0.9) rotate(10deg); }
-  70%       { transform: translateY(-40px) scaleY(1.05) rotate(-5deg); }
-  90%       { transform: translateY(4px) scaleY(0.92) scaleX(1.08); }
+/* --- 춤 동작: 좌우 흔들기 + 점프 + 회전 + 크기 변화 --- */
+@keyframes cat-dance {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  15% {
+    transform: translateY(-6px) rotate(-8deg) scale(1.03);
+  }
+  30% {
+    transform: translateY(0) rotate(6deg) scale(0.98);
+  }
+  45% {
+    transform: translateY(-22px) rotate(-4deg) scale(1.05);
+  }
+  60% {
+    transform: translateY(0) rotate(8deg) scale(0.97);
+  }
+  75% {
+    transform: translateY(-10px) rotate(-6deg) scale(1.02);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
 }
 
-/* ── shadow ── */
-@keyframes shadowBounce {
-  0%, 100% { transform: scaleX(1); opacity: 0.3; }
-  50%       { transform: scaleX(0.5); opacity: 0.1; }
+@keyframes cat-shadow-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  45% {
+    transform: scale(0.6);
+    opacity: 0.4;
+  }
 }
 
-@keyframes shadowSpin {
-  0%, 100% { transform: scaleX(1) scaleY(1); opacity: 0.3; }
-  50%       { transform: scaleX(0.7) scaleY(0.6); opacity: 0.15; }
+@keyframes cat-tail-wag {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(18deg);
+  }
 }
 
-/* ── music notes ── */
-@keyframes floatNote {
-  0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
-  100% { transform: translateY(-120px) rotate(25deg); opacity: 0; }
+@keyframes cat-eye-blink {
+  0%, 92%, 100% {
+    transform: scaleY(1);
+  }
+  96% {
+    transform: scaleY(0.1);
+  }
+}
+
+.is-playing .dancing-cat__image {
+  animation: cat-dance 1.4s ease-in-out infinite;
+}
+
+.is-playing .dancing-cat__shadow {
+  animation: cat-shadow-pulse 1.4s ease-in-out infinite;
+}
+
+.is-playing .cat-tail {
+  animation: cat-tail-wag 0.7s ease-in-out infinite;
+  transform-origin: 156px 74px;
+}
+
+.is-playing .cat-eye {
+  animation: cat-eye-blink 3.2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.is-paused .dancing-cat__image {
+  animation: none;
+  transform: translateY(0) rotate(0deg) scale(1);
+}
+
+.is-paused .dancing-cat__shadow {
+  animation: none;
+  opacity: 0.9;
+}
+
+/* 속도 조절 */
+.speed-slow.is-playing .dancing-cat__image,
+.speed-slow.is-playing .dancing-cat__shadow {
+  animation-duration: 2.4s;
+}
+
+.speed-normal.is-playing .dancing-cat__image,
+.speed-normal.is-playing .dancing-cat__shadow {
+  animation-duration: 1.4s;
+}
+
+.speed-fast.is-playing .dancing-cat__image,
+.speed-fast.is-playing .dancing-cat__shadow {
+  animation-duration: 0.7s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dancing-cat__image,
+  .dancing-cat__shadow,
+  .cat-tail,
+  .cat-eye {
+    animation: none !important;
+  }
 }

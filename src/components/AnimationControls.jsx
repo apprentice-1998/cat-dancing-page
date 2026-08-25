@@ -1,31 +1,42 @@
 import styles from './AnimationControls.module.css';
 
-const DANCE_STYLES = [
-  { id: 'bounce', label: '바운스', emoji: '🎵' },
-  { id: 'spin',   label: '스핀',   emoji: '🌀' },
-  { id: 'shake',  label: '쉐이크', emoji: '🎸' },
-  { id: 'jump',   label: '점프',   emoji: '⬆️' },
+const SPEEDS = [
+  { id: 'slow', label: '느리게' },
+  { id: 'normal', label: '보통' },
+  { id: 'fast', label: '빠르게' },
 ];
 
-export default function AnimationControls({ isPlaying, onToggle, danceStyle, onChangeDance }) {
+export default function AnimationControls({ isPlaying, onToggle, speed, onSpeedChange }) {
+  const handleKeyDown = (event) => {
+    if (event.key === ' ' || event.key === 'Enter') {
+      event.preventDefault();
+      onToggle();
+    }
+  };
+
   return (
     <div className={styles.controls}>
       <button
-        className={`${styles.playBtn} ${isPlaying ? styles.playing : ''}`}
+        type="button"
+        className={styles.toggleButton}
         onClick={onToggle}
-        aria-label={isPlaying ? '애니메이션 정지' : '애니메이션 시작'}
+        onKeyDown={handleKeyDown}
+        aria-pressed={isPlaying}
       >
-        {isPlaying ? '⏸ 정지' : '▶ 시작'}
+        {isPlaying ? '⏸ 정지' : '▶ 재생'}
       </button>
-      <div className={styles.danceMenu} role="group" aria-label="춤 스타일 선택">
-        {DANCE_STYLES.map(({ id, label, emoji }) => (
+
+      <div className={styles.speedGroup} role="radiogroup" aria-label="애니메이션 속도">
+        {SPEEDS.map(({ id, label }) => (
           <button
             key={id}
-            className={`${styles.danceBtn} ${danceStyle === id ? styles.active : ''}`}
-            onClick={() => onChangeDance(id)}
-            aria-pressed={danceStyle === id}
+            type="button"
+            role="radio"
+            aria-checked={speed === id}
+            className={`${styles.speedButton} ${speed === id ? styles.speedButtonActive : ''}`}
+            onClick={() => onSpeedChange(id)}
           >
-            {emoji} {label}
+            {label}
           </button>
         ))}
       </div>

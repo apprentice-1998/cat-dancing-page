@@ -1,29 +1,22 @@
-import './styles/global.css';
-import styles from './App.module.css';
+import Layout from './components/Layout';
 import DancingCat from './components/DancingCat';
 import AnimationControls from './components/AnimationControls';
-import { useAnimation } from './hooks/useAnimation';
+import useAnimation from './hooks/useAnimation';
 
-export default function App() {
-  const { isPlaying, toggle, danceStyle, changeDance } = useAnimation();
+function App() {
+  const { isPlaying, toggle, speed, setSpeed } = useAnimation(true);
 
   return (
-    <main className={styles.app}>
-      <div className={styles.background} />
-      <h1 className={styles.title}>
-        <span className={styles.emoji}>🐱</span> 댄싱 고양이
-      </h1>
-      <p className={styles.subtitle}>
-        {isPlaying ? '신나게 춤추는 중!' : '쉬는 중... 시작을 눌러줘!'}
-      </p>
-      <DancingCat isPlaying={isPlaying} danceStyle={danceStyle} />
+    <Layout>
+      <DancingCat isPlaying={isPlaying} speed={speed} />
       <AnimationControls
         isPlaying={isPlaying}
         onToggle={toggle}
-        danceStyle={danceStyle}
-        onChangeDance={changeDance}
+        speed={speed}
+        onSpeedChange={setSpeed}
       />
-      <footer className={styles.footer}>Made with ❤️ &amp; CSS keyframes</footer>
-    </main>
+    </Layout>
   );
 }
+
+export default App;
